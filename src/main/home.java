@@ -69,6 +69,7 @@ public class home extends javax.swing.JFrame {
         UpdBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/rsz_update_details.png"))); // NOI18N
         UpdBtn.setText("Update Patient Record");
         UpdBtn.setPreferredSize(new java.awt.Dimension(240, 59));
+        UpdBtn.addActionListener(this::UpdBtnActionPerformed);
         getContentPane().add(UpdBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
         HospitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/rsz_history1.png"))); // NOI18N
@@ -135,6 +136,10 @@ public class home extends javax.swing.JFrame {
     private void AddNewPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNewPatientBtnActionPerformed
         new AddNewPatientRecord().setVisible(true);
     }//GEN-LAST:event_AddNewPatientBtnActionPerformed
+
+    private void UpdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdBtnActionPerformed
+        new updatePatientRecord().setVisible(true);
+    }//GEN-LAST:event_UpdBtnActionPerformed
     
         
         

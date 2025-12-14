@@ -89,7 +89,7 @@ public class updatePatientRecord extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Any Major Disease Suffered Earlier ");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 370, 198, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 370, 380, -1));
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 61, 209, -1));
@@ -163,17 +163,17 @@ public class updatePatientRecord extends javax.swing.JFrame {
     private void search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_btnActionPerformed
         String patientID=jTextField1.getText();
         try{
-         Connection con=ConnectionProvider.getCon();
+Connection con = ConnectionProvider.getConnection();
          Statement st=con.createStatement();
          ResultSet rs=st.executeQuery("select * from patient where patientID='"+patientID+"'");
          if(rs.next()){
          jTextField2.setText(rs.getString(2));
          jTextField3.setText(rs.getString(3));
-         jTextField4.setText(rs.getString(4));
-         jTextField5.setText(rs.getString(5));
-         jTextField6.setText(rs.getString(6));
-         jTextField7.setText(rs.getString(7));
-         jTextField8.setText(rs.getString(8));
+         jTextField7.setText(rs.getString(4));
+         jTextField4.setText(rs.getString(5));
+         jTextField5.setText(rs.getString(6));
+         jTextField8.setText(rs.getString(7));
+         jTextField9.setText(rs.getString(8));
          jTextField1.setEditable(false);
          }else{
          JOptionPane.showMessageDialog(null, "Patient ID doesnot exist");
@@ -188,17 +188,39 @@ public class updatePatientRecord extends javax.swing.JFrame {
             String patientID=jTextField1.getText();
             String name=jTextField2.getText();
             String contactNumber=jTextField3.getText();
-            String age=jTextField4.getText();
-            String gender=jTextField5.getText();
-            String bloodGroup=jTextField6.getText();
-            String address=jTextField7.getText();
-            String anyMajor=jTextField8.getText();
-             try{
-         Connection con=ConnectionProvider.getCon();
-         Statement st=con.createStatement();
-         st.executeUpdate("update patient set name='"+name+"',contactNumber='"+contactNumber+"',age='"+age+"',gender='"+gender+"'"
-                 + ",bloodGroup='"+bloodGroup+"',address='"+address+"',anyMajorDiease='"+anyMajor+"'");
-         JOptionPane.showMessageDialog(null, "Successfully Updated");
+            String age=jTextField7.getText();
+            String gender=jTextField4.getText();
+            String bloodGroup=jTextField5.getText();
+            String address=jTextField8.getText();
+            String anyMajor=jTextField9.getText();
+            if (patientID.isEmpty() || name.isEmpty() || contactNumber.isEmpty() || age.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please fill in all required fields.");
+        return;
+    }
+
+         String sql = "UPDATE patient SET name=?, contactNumber=?, age=?, gender=?, bloodGroup=?, address=?, anyMajorDisease=? WHERE patientID=?";
+try (Connection con = ConnectionProvider.getConnection();
+     PreparedStatement pst = con.prepareStatement(sql)) {
+     pst.setString(1, name);
+    pst.setString(2, contactNumber);
+    pst.setString(3, age);
+    pst.setString(4, gender);
+    pst.setString(5, bloodGroup);
+    pst.setString(6, address);
+    pst.setString(7, anyMajor);
+    pst.setString(8, patientID);
+    pst.executeUpdate();
+    jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField7.setText("");
+            jTextField8.setText("");
+            jTextField9.setText("");
+            jTextField1.requestFocus(); 
+            
+    JOptionPane.showMessageDialog(null, "Successfully Updated");
              }catch(SQLException e){
              JOptionPane.showMessageDialog(null, e.getMessage());
              setVisible(false);

@@ -64,11 +64,11 @@ public class AddNewPatientRecord extends javax.swing.JFrame {
         getContentPane().add(CloseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Patient ID");
+        jLabel1.setText("Patient ID *");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 140, 26));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Name");
+        jLabel2.setText("Name *");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 140, 26));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -168,7 +168,7 @@ public class AddNewPatientRecord extends javax.swing.JFrame {
 
         ps.setString(1, PatientID);
         ps.setString(2, Name);
-        ps.setString(3, ContactNo);
+        ps.setString(3, ContactNo); 
         ps.setInt(4, Integer.parseInt(Age)); 
         ps.setString(5, Gender);
         ps.setString(6, BloodGroup);

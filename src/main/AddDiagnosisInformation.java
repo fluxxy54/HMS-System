@@ -17,6 +17,7 @@ import java.sql.ResultSetMetaData;
  */
 public class AddDiagnosisInformation extends javax.swing.JFrame {
     public int flag=0;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddDiagnosisInformation.class.getName());
 
     /**
@@ -26,7 +27,7 @@ public class AddDiagnosisInformation extends javax.swing.JFrame {
         initComponents();
         jLabel2.setVisible(false);
         jLabel8.setVisible(false);
-jComboBox1.setVisible(false);
+        wardCombo.setVisible(false);
 
     }
 
@@ -41,22 +42,22 @@ jComboBox1.setVisible(false);
 
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        SearchBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        SympField = new javax.swing.JTextField();
+        MedicField = new javax.swing.JTextField();
+        DiagField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        wardCombo = new javax.swing.JComboBox<>();
+        SaveBtn = new javax.swing.JButton();
+        CloseBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,18 +74,18 @@ jComboBox1.setVisible(false);
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 36, 101, -1));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/search.png"))); // NOI18N
-        jButton1.setText("Search");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(426, 32, -1, -1));
+        SearchBtn.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/search.png"))); // NOI18N
+        SearchBtn.setText("Search");
+        SearchBtn.addActionListener(this::SearchBtnActionPerformed);
+        getContentPane().add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(426, 32, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "PatientID", "Name", "Contact No.", "Age"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -108,17 +109,17 @@ jComboBox1.setVisible(false);
         jLabel5.setText("Medicines");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 364, 78, -1));
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField2.addActionListener(this::jTextField2ActionPerformed);
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 257, 236, -1));
+        SympField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        SympField.addActionListener(this::SympFieldActionPerformed);
+        getContentPane().add(SympField, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 257, 236, -1));
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField3.addActionListener(this::jTextField3ActionPerformed);
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 358, 236, -1));
+        MedicField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        MedicField.addActionListener(this::MedicFieldActionPerformed);
+        getContentPane().add(MedicField, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 358, 236, -1));
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField4.addActionListener(this::jTextField4ActionPerformed);
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 306, 236, -1));
+        DiagField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        DiagField.addActionListener(this::DiagFieldActionPerformed);
+        getContentPane().add(DiagField, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 306, 236, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Ward Required ?");
@@ -133,109 +134,115 @@ jComboBox1.setVisible(false);
         jCheckBox1.addActionListener(this::jCheckBox1ActionPerformed);
         getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 258, 92, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Single", "Duo" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 306, -1, -1));
+        wardCombo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        wardCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Single", "Duo" }));
+        getContentPane().add(wardCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 306, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/save-icon--1.png"))); // NOI18N
-        jButton2.setText("Save");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 462, -1, -1));
+        SaveBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        SaveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/save-icon--1.png"))); // NOI18N
+        SaveBtn.setText("Save");
+        SaveBtn.addActionListener(this::SaveBtnActionPerformed);
+        getContentPane().add(SaveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 462, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/Close.png"))); // NOI18N
-        jButton3.setText("Close");
-        jButton3.addActionListener(this::jButton3ActionPerformed);
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 462, -1, -1));
+        CloseBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        CloseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/Close.png"))); // NOI18N
+        CloseBtn.setText("Close");
+        CloseBtn.addActionListener(this::CloseBtnActionPerformed);
+        getContentPane().add(CloseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 462, -1, -1));
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/add new patient background.jpg"))); // NOI18N
         jLabel7.setText("jLabel7");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 780, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-String patientID = jTextField1.getText();
-//
-//try {
-//    Connection con = ConnectionProvider.getCon();
-//    String sql = "SELECT * FROM patient WHERE patientID = ?";
-//    PreparedStatement ps = con.prepareStatement(sql);
-//    ps.setString(1, patientID);
-//
-//    ResultSet rs = ps.executeQuery();
-//   DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-//model.setRowCount(0);
-//
-//ResultSetMetaData rsmd = rs.getMetaData();
-//int cols = rsmd.getColumnCount();
-//boolean found=false;
-//while (rs.next()) {
-//    found=true;
-//    Object[] row = new Object[cols];
-//    for (int i = 1; i <= cols; i++) {
-//        row[i - 1] = rs.getObject(i);
-//    }
-//    model.addRow(row);
-//}
-//
-//    if (found) {
-//        jLabel2.setVisible(true);
-//    } else {
-//        jLabel2.setVisible(false);
-//        jTextField1.setEditable(false);
-//        flag = 1;
-//    }
-//
-//} catch (Exception e) {
-//    JOptionPane.showMessageDialog(null, "Connection Error");
-//}
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
+    String patientID = jTextField1.getText();
+     if (patientID.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter a Patient ID to search!");
+            return;
+        }
+     try (Connection con = ConnectionProvider.getConnection()) {
+            String sql = "SELECT * FROM patient WHERE patientID = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, patientID);
+            ResultSet rs = ps.executeQuery();
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+
+            if (!rs.next()) {
+                jLabel2.setVisible(true);
+                flag = 0;
+            } else {
+                jLabel2.setVisible(false);
+                Object[] row = {
+                    rs.getString("patientID"),
+                    rs.getString("name"),
+                    rs.getString("contactNumber"),
+                    rs.getInt("age"),
+                    rs.getString("gender"),
+                    rs.getString("bloodGroup"),
+                    rs.getString("address"),
+                    rs.getString("anyMajorDisease")
+                };
+                model.addRow(row);
+                flag = 1;
+                jTextField1.setEditable(false);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Database Error:\n" + e.getMessage());
+        }
+    }//GEN-LAST:event_SearchBtnActionPerformed
+
+    private void SympFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SympFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_SympFieldActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void MedicFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_MedicFieldActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void DiagFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiagFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_DiagFieldActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
         if(flag==1){
         String PatientID=jTextField1.getText();
-        String symptom=jTextField2.getText();
-        String diagnosis=jTextField3.getText();
-        String medicines=jTextField4.getText();
+        String symptom=SympField.getText();
+        String diagnosis=MedicField.getText();
+        String medicines=DiagField.getText();
+        
         String wardReq;
         String typeWard;
                 if(jCheckBox1.isSelected()){
-                wardReq="Yes";
-                typeWard=(String)jComboBox1.getSelectedItem();
+                    wardReq="Yes";
+                    typeWard=(String)wardCombo.getSelectedItem();
                 }
                 else{
-                                wardReq="No";
-                typeWard="";
+                        wardReq="No";
+                        typeWard="";
 
                 }
                 if (!PatientID.trim().isEmpty()) {
 
     try {
-        Connection con = ConnectionProvider.getCon();
+        Connection con = ConnectionProvider.getConnection();
 
         String sql =
-            "INSERT INTO patientreport (patientID, symptom, diagnosis, medicine) "
-          + "VALUES (?, ?, ?, ?)";
+        "INSERT INTO patientreport (patientID, symptom, diagnosis, medicines, wardReq, typeWard) "
+        + "VALUES (?, ?, ?, ?, ?, ?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, PatientID);
         ps.setString(2, symptom);
         ps.setString(3, diagnosis);
         ps.setString(4, medicines);
+        ps.setString(5, wardReq);      
+        ps.setString(6, typeWard); 
 
         ps.executeUpdate();
 
@@ -250,21 +257,21 @@ String patientID = jTextField1.getText();
 } else {
     JOptionPane.showMessageDialog(null, "Patient ID Field is empty");
 }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_SaveBtnActionPerformed
     }
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void CloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseBtnActionPerformed
        setVisible(false);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_CloseBtnActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         if(jCheckBox1.isSelected())
         {
-        jLabel8.setVisible(true);
-        jComboBox1.setVisible(true);
+            jLabel8.setVisible(true);
+            wardCombo.setVisible(true);
         }
         else{
-                jLabel8.setVisible(false);
-        jComboBox1.setVisible(false);
+            jLabel8.setVisible(false);
+            wardCombo.setVisible(false);
 
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
@@ -299,11 +306,13 @@ String patientID = jTextField1.getText();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton CloseBtn;
+    private javax.swing.JTextField DiagField;
+    private javax.swing.JTextField MedicField;
+    private javax.swing.JButton SaveBtn;
+    private javax.swing.JButton SearchBtn;
+    private javax.swing.JTextField SympField;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -315,8 +324,6 @@ String patientID = jTextField1.getText();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JComboBox<String> wardCombo;
     // End of variables declaration//GEN-END:variables
 }

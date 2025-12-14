@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 import javax.swing.JTable;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 
 
@@ -79,6 +80,11 @@ public class FullHistoryOfThePatient extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/add new patient background.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         jLabel1.setPreferredSize(new java.awt.Dimension(780, 500));
+        jLabel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jLabel1ComponentShown(evt);
+            }
+        });
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, -1));
 
         pack();
@@ -90,8 +96,7 @@ public class FullHistoryOfThePatient extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        
-        try (Connection con = ConnectionProvider.getCon()) {
+        try (Connection con = ConnectionProvider.getConnection()) {
 
     String sql =
         "SELECT p.* " +
@@ -107,7 +112,12 @@ public class FullHistoryOfThePatient extends javax.swing.JFrame {
 } catch (SQLException e) {
     JOptionPane.showMessageDialog(null, e.getMessage());
 }
+
     }//GEN-LAST:event_formComponentShown
+
+    private void jLabel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel1ComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1ComponentShown
 
     /**
      * @param args the command line arguments
@@ -137,9 +147,15 @@ public class FullHistoryOfThePatient extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new FullHistoryOfThePatient().setVisible(true);
-        });
+         try (Connection con = ConnectionProvider.getConnection()) {
+        System.out.println("Connected!");
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+//        
+//        java.awt.EventQueue.invokeLater(() -> {
+//            new FullHistoryOfThePatient().setVisible(true);
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Youssef/Documents/NetBeansProjects/HMS%20Proj/src/main/home.java</file>
-            <file>file:/C:/Users/Youssef/Documents/NetBeansProjects/HMS%20Proj/src/main/AddNewPatientRecord.java</file>
-            <file>file:/C:/Users/Youssef/Documents/NetBeansProjects/HMS%20Proj/src/main/App.java</file>
-            <file>file:/C:/Users/Youssef/Documents/NetBeansProjects/HMS%20Proj/src/main/FullHistoryOfThePatient.java</file>
-            <file>file:/C:/Users/Youssef/Documents/NetBeansProjects/HMS%20Proj/src/main/login.java</file>
+            <file>file:/home/fluxxy/HMS-System/src/main/home.java</file>
+            <file>file:/home/fluxxy/HMS-System/src/Project/ConnectionProvider.java</file>
+            <file>file:/home/fluxxy/HMS-System/src/main/FullHistoryOfThePatient.java</file>
+            <file>file:/home/fluxxy/HMS-System/src/main/AddDiagnosisInformation.java</file>
+            <file>file:/home/fluxxy/HMS-System/src/main/updatePatientRecord.java</file>
         </group>
     </open-files>
 </project-private>

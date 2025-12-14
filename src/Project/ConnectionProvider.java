@@ -11,11 +11,11 @@ public class ConnectionProvider {
     private static final String USER = "root";
     private static final String PASSWORD = "P@ssw0rd";
 
-    public static Connection getConnection() throws SQLException {
+   public static Connection getConnection() {
+    try {
         return DriverManager.getConnection(URL, USER, PASSWORD);
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
     }
-
-    public static Connection getCon() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-}
+}}
