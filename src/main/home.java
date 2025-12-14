@@ -115,21 +115,21 @@ public class home extends javax.swing.JFrame {
         int a = JOptionPane.showConfirmDialog(null, "Do you really want to logout", "Select", JOptionPane.YES_NO_OPTION);
         if (a==0){
             setVisible(false);
-         //   new login().setVisible(true);
+            new login().setVisible(true);
         }
         
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
     private void HospitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitBtnActionPerformed
-        // TODO add your handling code here:
+       new AboutHospital().setVisible(true);
     }//GEN-LAST:event_HospitBtnActionPerformed
 
     private void FullHistoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FullHistoryBtnActionPerformed
-        // TODO add your handling code here:
+       new FullHistoryOfThePatient().setVisible(true);
     }//GEN-LAST:event_FullHistoryBtnActionPerformed
 
     private void AddDiagBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddDiagBtnActionPerformed
-        // TODO add your handling code here:
+        new AddDiagnosisInformation().setVisible(true);
     }//GEN-LAST:event_AddDiagBtnActionPerformed
 
     private void AddNewPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNewPatientBtnActionPerformed
