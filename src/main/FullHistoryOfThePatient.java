@@ -4,6 +4,16 @@
  */
 package main;
 
+import Project.ConnectionProvider;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.JTable;
+import javax.swing.JOptionPane;
+
 
 
 /**
@@ -68,6 +78,7 @@ public class FullHistoryOfThePatient extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pics/add new patient background.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
+        jLabel1.setPreferredSize(new java.awt.Dimension(780, 500));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, -1));
 
         pack();
@@ -79,16 +90,23 @@ public class FullHistoryOfThePatient extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        // TODO add your handling code here:
-//        try(Connection con = DriverManager.getConnection(url, user, password)){
-//            Statement stmt = con.createStatement();
-//            ResultSet res = stmt.executeQuery("SELECT * FROM patient WHERE patient.patientID = patientreport.patientID");
-//            jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//            jTable1.setModel(DbUtils.resultSetToTableModel(res));
-//        }
-//        catch(SQLException e){
-//            JOptionPane.showMessageDialog(null,"Connection Error");
-//        }
+        
+        try (Connection con = ConnectionProvider.getCon()) {
+
+    String sql =
+        "SELECT p.* " +
+        "FROM patient p " +
+        "JOIN patientreport pr ON p.patientID = pr.patientID";
+
+    PreparedStatement pst = con.prepareStatement(sql);
+    ResultSet res = pst.executeQuery();
+
+    jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    jTable1.setModel(DbUtils.resultSetToTableModel(res));
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, e.getMessage());
+}
     }//GEN-LAST:event_formComponentShown
 
     /**
